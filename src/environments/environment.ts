@@ -3,7 +3,17 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  keycloak: {
+    issuer: "http://localhost:8080/realms/SAT",
+    redirectUri: "http://localhost:4200/my-account",
+    clientId: "DEMO",
+    scope: "openid profile",
+    responseType: "code",
+    showDebugInformation: true,
+    logoutUrl: 'http://localhost:4200',
+    skipIssuerCheck: true
+  }
 };
 
 /*
