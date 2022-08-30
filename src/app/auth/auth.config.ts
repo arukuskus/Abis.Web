@@ -1,5 +1,5 @@
-import {AuthConfig} from "angular-oauth2-oidc";
-import {environment} from "../environments/environment";
+import { AuthConfig } from "angular-oauth2-oidc";
+import { environment } from "../../environments/environment";
 
 export const authCodeFlowConfig: AuthConfig = {
   // Url of the Identity Provider
@@ -19,6 +19,9 @@ export const authCodeFlowConfig: AuthConfig = {
   // dummyClientSecret: 'secret',
 
   responseType: 'code',
+
+  logoutUrl: environment.keycloak.logoutUrl, // куда будем выходить
+  skipIssuerCheck: true, // убираем какую - то ошибку
 
   // set the scope for the permissions the client should request
   // The first four are defined by OIDC.

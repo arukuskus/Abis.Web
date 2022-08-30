@@ -5,13 +5,8 @@ import {
   Router,
   RouterStateSnapshot, UrlTree,
 } from '@angular/router';
-import { Observable, of } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
-import { AuthService } from "./services/auth-service/auth.service";
-import {AuthenticatedResult} from "angular-auth-oidc-client/lib/auth-state/auth-result";
-import {AuthConfig, OAuthService} from "angular-oauth2-oidc";
-import {OidcSecurityService} from "angular-auth-oidc-client";
-import { authCodeFlowConfig } from "./auth.config";
+import { Observable } from 'rxjs';
+import { OAuthService} from "angular-oauth2-oidc";
 import {InitialAuthService} from "./services/auth-service/InitialAuthService";
 
 
@@ -19,11 +14,9 @@ import {InitialAuthService} from "./services/auth-service/InitialAuthService";
 export class AuthorizationGuard implements CanActivate {
 
   constructor(
-    //private authService: AuthService,
     private router: Router,
-    //public oidcSecurityService: OidcSecurityService,
-    private oauthService: OAuthService,
-    private initAuth: InitialAuthService
+    private oauthService: OAuthService, // библиотека Oauth2
+    private initAuth: InitialAuthService // сервис авторизации
   ) {}
 
   canActivate(
@@ -36,31 +29,18 @@ export class AuthorizationGuard implements CanActivate {
     | UrlTree {
 
 
+    // Пользователь пытается обратиться к защищенному my-account
     if(!this.initAuth.isAuthorized) {
-      //this.initAuth.initAuth().then();
 
-      this.oauthService.loadDiscoveryDocumentAndTryLogin();
+       // this.initAuth.initAuth().then(
+       //   () => {
+       //     this.initAuth.isAuthorized = true;
+       //   }
+       // )
+
       this.initAuth.isAuthorized = true;
 
     }
     return this.initAuth.isAuthorized;
-    // Если не авторизованы
-    // return this.oidcSecurityService.isAuthenticated$.pipe(
-    //   map(({ isAuthenticated }) => {
-    //     // allow navigation if authenticated
-    //     if (isAuthenticated) {
-    //       return true;
-    //     }else {
-    //       // Отправить на авторизацию
-    //       this.oidcSecurityService.authorize();
-    //     }
-    //
-    //
-    //     // redirect if not authenticated
-    //     this.router.navigate(['']);
-    //
-    //     return false;
-    //   })
-    // );
   }
 }

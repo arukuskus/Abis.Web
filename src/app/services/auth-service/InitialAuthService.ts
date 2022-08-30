@@ -47,13 +47,16 @@ export class InitialAuthService {
         });
 
 
+      // Проверяем авторизацию (смотрит есть ли токены и привязвается к initImplicitFlow(), если нет допустимого токена)
       this.oauthService.loadDiscoveryDocumentAndLogin().then(
         (isLoggedIn) => {
 
+          // Вроде разрешаем пользователю доступ к приложению
           if (isLoggedIn) {
             this.oauthService.setupAutomaticSilentRefresh();
             resolveFn();
           } else {
+            // Вызываем аутентификацию через keycloak
             this.oauthService.initImplicitFlow();
             rejectFn();
           }
@@ -79,6 +82,8 @@ export class InitialAuthService {
   }
 
   logoutSession() {
+    // не знаю надо ли отзывать токен перед выходом
+    this.oauthService.revokeTokenAndLogout();
     this.oauthService.logOut();
   }
 }
