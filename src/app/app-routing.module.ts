@@ -1,29 +1,19 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Routes, RouterModule } from "@angular/router";
-import {HomePageComponent} from "./components/home-page/home-page.component";
-import {AuthComponent} from "./components/auth/auth.component";
-import {UserPageComponent} from "./components/user-page/user-page.component";
-import {AuthorizationGuard} from "./auth.guard";
+import { Routes, RouterModule } from '@angular/router';
+import { HomePageComponent } from './components/home-page/home-page.component';
+import { InstanceComponent } from './components/instance/instance.component';
+import { ReceiptComponent } from './components/receipt/receipt.component';
 
 const routes: Routes = [
-  { path: '', component:HomePageComponent },
-  { path: 'login',
-    component: AuthComponent,
-  },
-  { path: 'my-account',
-    component: UserPageComponent,
-    canActivate: [AuthorizationGuard] //вроде защищаем страничку пользователя (а должны защищать приложение)
-  },
-  { path: '**', redirectTo: '', pathMatch: 'full'}
+  { path: '', component: HomePageComponent },
+  { path: 'receipts', component: ReceiptComponent },
+  { path: 'instance', component: InstanceComponent }
+  //{ path: '', pathMatch: 'full', redirectTo: '/welcome' },
+  //{ path: 'welcome', loadChildren: () => import('./pages/welcome/welcome.module').then(m => m.WelcomeModule) }
 ];
 
-
 @NgModule({
-  declarations: [],
-  imports: [
-    [RouterModule.forRoot(routes)]
-  ],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

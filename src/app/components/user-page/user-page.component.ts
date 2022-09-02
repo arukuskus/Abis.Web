@@ -10,7 +10,7 @@ import { InitialAuthService } from "../../services/auth-service/InitialAuthServi
   styleUrls: ['./user-page.component.css']
 })
 
-// Просто тестовый компонент, который в итоге будет заменен на приложение абис
+// Просто тестовый компонент пользователя при успешной аутентификации через sso keycloak
 export class UserPageComponent implements OnInit {
 
   constructor(

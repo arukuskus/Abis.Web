@@ -8,6 +8,8 @@ import { BehaviorSubject, Observable } from "rxjs";
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css']
 })
+
+// Страница логина (Но в абис такой не будет так как импользуем sso)
 export class AuthComponent implements OnInit {
 
 

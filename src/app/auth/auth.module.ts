@@ -1,7 +1,6 @@
 import { APP_INITIALIZER, NgModule } from "@angular/core";
 import { AuthConfig, OAuthModule, OAuthStorage } from "angular-oauth2-oidc";
 import { InitialAuthService } from "../services/auth-service/InitialAuthService";
-import { environment } from "../../environments/environment";
 import { authCodeFlowConfig } from "./auth.config";
 
 //const configAuthZero: AuthConfig = environment.keycloak;
